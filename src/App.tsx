@@ -1,21 +1,16 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * Generated with the TypeScript template
- * https://github.com/react-native-community/react-native-template-typescript
  *
  * @format
  */
 
 import React from 'react';
+import { StatusBar } from "components";
 import {
   SafeAreaView,
   StyleSheet,
   ScrollView,
   View,
   Text,
-  StatusBar,
 } from 'react-native';
 
 import {
@@ -26,11 +21,11 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-const App = () => {
+function App(){
   const usingHermes = typeof HermesInternal === 'object' && HermesInternal !== null;
   return (
     <>
-      <StatusBar barStyle="dark-content" />
+      <StatusBar />
       <SafeAreaView>
         <ScrollView
           contentInsetAdjustmentBehavior="automatic"
