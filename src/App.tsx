@@ -1,16 +1,12 @@
-/**
- *
- * @format
- */
-
-import React from 'react';
+import React, { useState } from 'react';
 import { StatusBar } from "components";
+import axios from "axios";
 import {
   SafeAreaView,
   StyleSheet,
-  ScrollView,
-  View,
-  Text,
+  TextInput,
+  TouchableOpacity,
+  Text
 } from 'react-native';
 
 import {
@@ -21,50 +17,26 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-function App(){
-  const usingHermes = typeof HermesInternal === 'object' && HermesInternal !== null;
+function App() {
+  const [value, setValue] = useState("")
+
+  function onChangeText(value: string) {
+    setValue(value)
+  }
+
+  async function searchImages() {
+    const response = await axios.get("https://serpapi.com/playground?q=Apple&tbm=isch&ijn=0")
+    console.log(response)
+  }
+
   return (
     <>
       <StatusBar />
       <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <Header />
-          {!usingHermes ? null : (
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
-            </View>
-          )}
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One</Text>
-              <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-                screen and then come back to see your edits.
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>See Your Changes</Text>
-              <Text style={styles.sectionDescription}>
-                <ReloadInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Debug</Text>
-              <Text style={styles.sectionDescription}>
-                <DebugInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
-            </View>
-            <LearnMoreLinks />
-          </View>
-        </ScrollView>
+        <TextInput style={{borderWidth: 2}} value={value} onChangeText={onChangeText} />
+        <TouchableOpacity onPress={searchImages} >
+        <Text>Search</Text>
+        </TouchableOpacity>
       </SafeAreaView>
     </>
   );
